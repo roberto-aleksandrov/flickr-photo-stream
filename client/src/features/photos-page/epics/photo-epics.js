@@ -1,17 +1,16 @@
 import { ofType } from 'redux-observable';
 import { mergeMap, map} from 'rxjs/operators';
 import { merge, of } from 'rxjs';
-import { pipe, prop, match, nth, replace } from 'ramda';
+import { pipe, path, match, nth, replace, split } from 'ramda';
 
 import { GET_PHOTOS } from '../types'
 import { getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos } from '../actions';
 import { sendApiRequest } from '../../../actions';
 import { transformNested } from '../../../utilities';
 
-
 export const photoEpic = action$ => action$.pipe(
     ofType(GET_PHOTOS.DEFAULT),
-    mergeMap(() => 
+    mergeMap(({payload}) => 
         merge(
             of(getPhotosPending()),
             of(sendApiRequest({
@@ -19,6 +18,7 @@ export const photoEpic = action$ => action$.pipe(
                 url: 'services/feeds/photos_public.gne?jsoncallback=?&format=json',
                 fulfilled: getPhotosFulfilled,
                 rejected: getPhotosRejected,
+                data: payload
             }, {
                 api: 'flickrApi'
             }))
@@ -27,13 +27,16 @@ export const photoEpic = action$ => action$.pipe(
 
 const AUTHOR_NAME_REGEX = /\((.*?)\)/
 
-const mapAuthorNames = transformNested(['items', 'author'], pipe(match(AUTHOR_NAME_REGEX), nth(1), replace('\"', '')))
+const mapAuthorNames = pipe(
+    transformNested(['author'], pipe(match(AUTHOR_NAME_REGEX), nth(1), replace(/\"/g, ''))),
+    transformNested(['tags'], split(' '))
+);
 
 export const photoEpicFulfilled = action$ => action$.pipe(
     ofType(GET_PHOTOS.FULFILLED),
     map(
         pipe(
-            prop('payload'),
+            path(['payload', 'items']),
             mapAuthorNames,
             storePhotos
         )

@@ -1,11 +1,11 @@
 import { STORE_PHOTOS } from "../types";
 
-const initialState = {items: []};
+const initialState = [];
 
 export const photosReducer = (state = initialState, {type, payload})=> {
     switch(type){
         case STORE_PHOTOS:
-            return payload
+            return [...state, ...payload]
         default: 
             return state;
     }

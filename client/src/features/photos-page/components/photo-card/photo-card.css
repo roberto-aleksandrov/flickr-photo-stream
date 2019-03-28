@@ -1,0 +1,15 @@
+.photo-card .card-title {
+    height: 50px;
+}
+
+.photo-card .card {
+    height: 100%;
+}
+
+.photo-card {
+    padding-top: 3%
+}
+
+.photo-card-tags {
+    height: 100%;
+}
