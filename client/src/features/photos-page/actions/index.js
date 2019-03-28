@@ -1,5 +1,9 @@
-import { getPhotos } from './photo-actions';
+import { getPhotos, getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos } from './photo-actions';
 
 export {
-    getPhotos
+    getPhotos,
+    getPhotosPending,
+    getPhotosFulfilled,
+    getPhotosRejected ,
+    storePhotos
 };

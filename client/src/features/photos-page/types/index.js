@@ -1,5 +1,6 @@
-import { GET_PHOTOS } from './photo-types';
+import { GET_PHOTOS, STORE_PHOTOS } from './photo-types';
 
 export { 
-    GET_PHOTOS
+    GET_PHOTOS,
+    STORE_PHOTOS
 };

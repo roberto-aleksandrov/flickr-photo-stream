@@ -4,9 +4,16 @@ import App from './App';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { flickrApi }from './api-services';
+import { flickrApiConfig } from './api-services/configurations';
+import 'bootstrap/dist/css/bootstrap.css';
+
+const apis = {
+   flickrApi: flickrApi(flickrApiConfig)
+}
 
 ReactDOM.render(
-<Provider store={configureStore()}> 
+<Provider store={configureStore(apis)}> 
    <App />
 </Provider> 
 , document.getElementById('root'));

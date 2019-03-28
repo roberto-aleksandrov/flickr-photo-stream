@@ -1,11 +1,10 @@
-import { GET_PHOTOS } from "../types";
+import { STORE_PHOTOS } from "../types";
 
-const initialState = {};
+const initialState = {items: []};
 
 export const photosReducer = (state = initialState, {type, payload})=> {
     switch(type){
-        case GET_PHOTOS.FULFILLED:
-        
+        case STORE_PHOTOS:
             return payload
         default: 
             return state;

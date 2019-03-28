@@ -1,10 +1,11 @@
 import { combineEpics } from 'redux-observable';
-import { photoEpic } from '../features/photos-page/epics';
+import { photoEpic, photoEpicFulfilled } from '../features/photos-page/epics';
 import apiRequestEpic from './api-request-epic';
 
-const rootEpic = combineEpics(
+const rootEpic = (apis) => combineEpics(
     photoEpic,
-    apiRequestEpic   
+    photoEpicFulfilled,
+    apiRequestEpic(apis)   
 );
 
 export default rootEpic;
