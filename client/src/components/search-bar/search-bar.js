@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, Button, Col } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button } from 'reactstrap';
 import { Formik, Form, Field } from 'formik';
 
 const SearchBar = ({ handleSubmit, placeHolder, searchButtonText }) => (

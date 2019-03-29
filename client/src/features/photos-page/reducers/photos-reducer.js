@@ -1,4 +1,4 @@
-import { STORE_PHOTOS } from "../types";
+import { STORE_PHOTOS, SET_PHOTOS_FILTERS } from "../types";
 
 const initialState = {
     pagesInfo: {
@@ -23,7 +23,7 @@ export const photosReducer = (state = initialState, {type, payload})=> {
                 },
                 photos: [...state.photos, ...payload.photos.photo]
             }
-        case 'SET_PHOTOS_FILTERS': 
+        case SET_PHOTOS_FILTERS:
             return {
                 ...initialState,
                 filters: {

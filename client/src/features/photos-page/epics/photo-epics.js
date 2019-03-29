@@ -5,8 +5,7 @@ import { merge, of } from 'rxjs';
 import { GET_PHOTOS } from '../types'
 import { getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos } from '../actions';
 import { sendApiRequest } from '../../../actions';
-import { processGetPhotosResponse } from '../utilities';
-import { transformNested } from '../../../utilities';
+import { processGetPhotosResponse } from '../utilities';;
 
 export const photoEpic = action$ => action$.pipe(
     ofType(GET_PHOTOS.DEFAULT),
@@ -24,13 +23,6 @@ export const photoEpic = action$ => action$.pipe(
             }))
         ))
 );
-
-// const AUTHOR_NAME_REGEX = /\((.*?)\)/
-
-// const mapAuthorNames = pipe(
-//     transformNested(['author'], pipe(match(AUTHOR_NAME_REGEX), nth(1), replace(/\"/g, ''))),
-//     transformNested(['tags'], split(' '))
-// );
 
 export const photoEpicFulfilled = action$ => action$.pipe(
     ofType(GET_PHOTOS.FULFILLED),

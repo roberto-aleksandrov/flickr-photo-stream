@@ -1,5 +1,4 @@
 import React from 'react';
-import { take } from 'ramda';
 import { Col, Card, CardImg, CardBody, CardTitle, CardLink } from 'reactstrap';
 
 import { cutText } from '../../../../utilities';
