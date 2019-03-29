@@ -13,7 +13,6 @@ export const photoEpic = action$ => action$.pipe(
         merge(
             of(getPhotosPending()),
             of(sendApiRequest({
-                method: 'GET',
                 url: 'services/rest/',
                 fulfilled: getPhotosFulfilled,
                 rejected: getPhotosRejected,
