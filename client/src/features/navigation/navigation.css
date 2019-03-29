@@ -1,3 +1,7 @@
 .navbar {
     background-color: lightgray;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    z-index: 3;
 }

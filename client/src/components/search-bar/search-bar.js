@@ -2,7 +2,7 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, Button, Col } from 'reactstrap';
 import { Formik, Form, Field } from 'formik';
 
-const SearchBar = ({handleSubmit, placeHolder, searchButtonText }) => (
+const SearchBar = ({ handleSubmit, placeHolder, searchButtonText }) => (
     <Formik initialValues={{searchText: '' }} onSubmit={handleSubmit}>
         <Form>    
             <InputGroup>

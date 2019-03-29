@@ -8,6 +8,8 @@ import { getPhotos, setPhotosFilters } from './actions';
 import { GET_PHOTOS_QUERY_STRING } from './constants';
 import SearchBar from '../../components/search-bar';
 
+import './photos-page.css';
+
 class PhotosPage extends Component { 
     
     handleSubmit = ({ searchText }) => {
@@ -28,24 +30,27 @@ class PhotosPage extends Component {
         const { photos, pagesInfo } = this.props;
 
         const photoCards = photos.map((photo, index) => <PhotoCard key={index} {...photo}/>);
-        return (
-            <Container>
-                <SearchBar 
-                    handleSubmit={this.handleSubmit}
-                    placeHolder='Enter tag name'
-                    searchButtonText='Search...'
-                />
-                <InfiniteScroll
-                    pageStart={0}
-                    loadMore={this.getPhotos}
-                    hasMore={pagesInfo.pages === undefined || pagesInfo.pages > pagesInfo.page}
-                    loader={<div className="loader" key={0}>Loading ...</div>}
-                >
+        return ( 
+            <InfiniteScroll
+                useWindow={false}
+                pageStart={0}
+                loadMore={this.getPhotos}
+                hasMore={pagesInfo.pages === undefined || pagesInfo.pages > pagesInfo.page}
+                loader={<div className="loader" key={0}>Loading ...</div>}
+            >
+                <Container>
+                    <Row className='photo-search-bar-row'>
+                        <SearchBar 
+                            handleSubmit={this.handleSubmit}
+                            placeHolder='Enter tag name'
+                            searchButtonText='Search...'
+                        />
+                    </Row>
                     <Row>
                         {photoCards}
                     </Row>
-                </InfiniteScroll>            
-            </Container>
+                </Container>
+            </InfiniteScroll>   
         )
      }
 }
