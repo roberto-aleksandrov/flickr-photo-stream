@@ -8,7 +8,6 @@ const initialState = {
     photos: [],
     perPage: 20,
     filters: {
-        names: [],
         tags: ['safe'],
     }
 };
@@ -28,7 +27,6 @@ export const photosReducer = (state = initialState, {type, payload})=> {
             return {
                 ...initialState,
                 filters: {
-                    names: payload.names,
                     tags: ['safe', ...payload.tags.split(',')]
                 }
             }

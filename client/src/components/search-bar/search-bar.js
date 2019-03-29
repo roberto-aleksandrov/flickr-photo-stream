@@ -1,14 +1,14 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Button, Col } from 'reactstrap';
 import { Formik, Form, Field } from 'formik';
 
-const SearchBar = ({handleSubmit}) => (
-    <Formik initialValues={{ text: '' }} onSubmit={handleSubmit}>
+const SearchBar = ({handleSubmit, placeHolder, searchButtonText }) => (
+    <Formik initialValues={{searchText: '' }} onSubmit={handleSubmit}>
         <Form>    
             <InputGroup>
-                <Field type="text" name="text" className="form-control" placeholder='Search by tag'/>
+                <Field type="text" name="searchText" className="form-control" placeholder={placeHolder}/>
                 <InputGroupAddon addonType="prepend">
-                    <Button type='submit'>Search...</Button>
+                    <Button type='submit'>{searchButtonText}</Button>
                 </InputGroupAddon>
             </InputGroup>   
         </Form>

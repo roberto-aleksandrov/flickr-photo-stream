@@ -1,9 +1,10 @@
-import { getPhotos, getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos } from './photo-actions';
+import { getPhotos, getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos, setPhotosFilters } from './photo-actions';
 
 export {
     getPhotos,
     getPhotosPending,
     getPhotosFulfilled,
     getPhotosRejected ,
-    storePhotos
+    storePhotos,
+    setPhotosFilters
 };

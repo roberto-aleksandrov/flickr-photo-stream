@@ -5,32 +5,23 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import PhotoCard from './components/photo-card';
 import { getPhotos, setPhotosFilters } from './actions';
+import { GET_PHOTOS_QUERY_STRING } from './constants';
 import SearchBar from '../../components/search-bar';
 
 class PhotosPage extends Component { 
     
-    componentDidMount() {
-        // this.getPhotos();
-    }
-
-    handleSubmit = (values) => {
-        this.props.setPhotosFilters({tags: values.text, names: []});
+    handleSubmit = ({ searchText }) => {
+        this.props.setPhotosFilters({ tags: searchText });
         return;
     }
 
     getPhotos = () => {
         const { pagesInfo, getPhotos, photoFilters } = this.props;
 
-        getPhotos({
+        getPhotos(GET_PHOTOS_QUERY_STRING({
             page: pagesInfo.page + 1,
-            per_page: 20,
             tags: photoFilters.tags.join(','),
-            extras: 'tags,description,url_o,url_c',
-            format: 'json',
-            method: 'flickr.photos.search',
-            api_key: 'acd37d46e39973a36b1b2923a6777cfa',
-            tag_mode: 'all',
-        });
+        }));
     }
 
     render() {
@@ -39,7 +30,11 @@ class PhotosPage extends Component {
         const photoCards = photos.map((photo, index) => <PhotoCard key={index} {...photo}/>);
         return (
             <Container>
-                <SearchBar handleSubmit={this.handleSubmit}/>
+                <SearchBar 
+                    handleSubmit={this.handleSubmit}
+                    placeHolder='Enter tag name'
+                    searchButtonText='Search...'
+                />
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.getPhotos}

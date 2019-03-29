@@ -5,6 +5,8 @@ import { createAsyncActions } from '../../../utilities';
 
 export const storePhotos = createAction(STORE_PHOTOS);
 
+export const setPhotosFilters = createAction('SET_PHOTOS_FILTERS')
+
 export const {
     getPhotos,
     getPhotosPending,
