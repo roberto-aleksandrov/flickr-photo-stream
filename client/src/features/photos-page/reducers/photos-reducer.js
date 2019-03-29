@@ -1,11 +1,37 @@
-import { STORE_PHOTOS } from "../types";
+import { GET_PHOTOS } from "../types";
 
-const initialState = [];
+const initialState = {
+    pagesInfo: {
+        page: 0, 
+        pages: undefined,
+    },
+    photos: [],
+    perPage: 20,
+    filters: {
+        names: [],
+        tags: ['safe'],
+    }
+};
 
 export const photosReducer = (state = initialState, {type, payload})=> {
     switch(type){
-        case STORE_PHOTOS:
-            return [...state, ...payload]
+        case GET_PHOTOS.FULFILLED:
+            return {
+                ...state,
+                pagesInfo: {
+                    page: payload.photos.page,
+                    pages: payload.photos.pages,
+                },
+                photos: [...state.photos, ...payload.photos.photo]
+            }
+        case 'SET_PHOTOS_FILTERS': 
+            return {
+                ...initialState,
+                filters: {
+                    names: payload.names,
+                    tags: ['safe', ...payload.tags.split(',')]
+                }
+            }
         default: 
             return state;
     }

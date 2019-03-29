@@ -1,6 +1,6 @@
-import { photoEpic, photoEpicFulfilled} from './photo-epics';
+import { photoEpic} from './photo-epics';
 
 export {
     photoEpic,
-    photoEpicFulfilled
+    // photoEpicFulfilled
 }
