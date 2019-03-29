@@ -1,20 +1,26 @@
 import React from 'react';
 import { take } from 'ramda';
-import { Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardLink, CardSubtitle, Button } from 'reactstrap';
+import { Col, Card, CardImg, CardBody, CardTitle, CardLink } from 'reactstrap';
+
+import { cutText } from '../../../../utilities';
+
 import './photo-card.css';
 
-const PhotoCard = ({link, title, tags, owner, id, url_c, url_o}) => {
+const PhotoCard = ({title, tags, authorLink, photoLink, owner, description, imageUrl}) => {
   return (
       <Col className='photo-card' xl={3} md={4} sm={6}>
         <Card>
-          <CardImg top width="100%" height="200px" src={url_o || url_c} alt="Card image cap" />
+          <CardImg top width="100%" height="200px" src={imageUrl} alt="Card image cap" />
           <CardBody>
             <CardTitle>
-              <CardLink href={`https://www.flickr.com/photos/${owner}/${id}`}>{take(20)(title)}</CardLink>
+              <CardLink href={photoLink}>{cutText(15, title)}</CardLink>
               <span> by </span>
-              <CardLink href={link}>{take(20)(owner)}</CardLink>
+              <CardLink href={authorLink}>{cutText(20, owner)}</CardLink>
             </CardTitle>
-            <CardSubtitle className='photo-card-tags'>Tags: {`${take(20)(tags)}${tags.length > 20 ? '...' : ''}` || 'No tags'}</CardSubtitle>
+            <div className='photo-card-body'>
+              <div>Description: { cutText(50, description._content) || 'No description' }</div>
+              <div className='photo-card-tags'>Tags: { cutText(50, tags) || 'No tags' }</div>
+            </div>
           </CardBody>
         </Card>
       </Col>
