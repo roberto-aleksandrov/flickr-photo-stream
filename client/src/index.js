@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const apis = {
    flickrApi: flickrApi(flickrApiConfig)

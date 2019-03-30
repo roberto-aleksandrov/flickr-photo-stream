@@ -1,4 +1,4 @@
-const GET_PHOTOS_QUERY_STRING = ({page, tags}) => ({
+export const GET_PHOTOS_QUERY_STRING = ({page, tags}) => ({
     page,
     tags,
     per_page: 20,
@@ -6,5 +6,3 @@ const GET_PHOTOS_QUERY_STRING = ({page, tags}) => ({
     method: 'flickr.photos.search',
     tag_mode: 'all',
 });
-
-export default GET_PHOTOS_QUERY_STRING;

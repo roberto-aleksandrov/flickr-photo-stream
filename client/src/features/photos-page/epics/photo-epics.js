@@ -1,11 +1,18 @@
 import { ofType } from 'redux-observable';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 
-import { GET_PHOTOS } from '../types'
-import { getPhotosPending, getPhotosFulfilled, getPhotosRejected, storePhotos } from '../actions';
+import { 
+    getPhotosPending,
+    getPhotosFulfilled,
+    getPhotosRejected,
+    processPhotos,
+    processPhotosFulfilled,
+    processPhotosRejected } from '../actions';
+import { GET_PHOTOS, PROCESS_PHOTOS } from '../types'
 import { sendApiRequest } from '../../../actions';
 import { processGetPhotosResponse } from '../utilities';;
+
 
 export const photoEpic = action$ => action$.pipe(
     ofType(GET_PHOTOS.DEFAULT),
@@ -14,7 +21,7 @@ export const photoEpic = action$ => action$.pipe(
             of(getPhotosPending()),
             of(sendApiRequest({
                 url: 'services/rest/',
-                fulfilled: getPhotosFulfilled,
+                onSuccess: [getPhotosFulfilled, processPhotos],
                 rejected: getPhotosRejected,
                 data: payload
             }, {
@@ -24,6 +31,8 @@ export const photoEpic = action$ => action$.pipe(
 );
 
 export const photoEpicFulfilled = action$ => action$.pipe(
-    ofType(GET_PHOTOS.FULFILLED),
-    map(({payload}) => storePhotos(processGetPhotosResponse(payload)))
+    ofType(PROCESS_PHOTOS.DEFAULT),
+    map(({payload}) => processGetPhotosResponse(payload)),
+    map(processPhotosFulfilled),
+    catchError(processPhotosRejected)
 );

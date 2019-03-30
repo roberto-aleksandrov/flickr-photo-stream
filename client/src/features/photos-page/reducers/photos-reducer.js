@@ -1,9 +1,11 @@
-import { STORE_PHOTOS, SET_PHOTOS_FILTERS } from "../types";
+import { toast } from "react-toastify";
+import { PROCESS_PHOTOS, SET_PHOTOS_FILTERS, GET_PHOTOS } from "../types";
+import { GET_PHOTOS_FAILURE_MESSAGE } from '../constants';
 
 const initialState = {
     pagesInfo: {
         page: 0, 
-        pages: undefined,
+        pages: 1,
     },
     photos: [],
     perPage: 20,
@@ -14,7 +16,7 @@ const initialState = {
 
 export const photosReducer = (state = initialState, {type, payload})=> {
     switch(type){
-        case STORE_PHOTOS:
+        case PROCESS_PHOTOS.FULFILLED:
             return {
                 ...state,
                 pagesInfo: {
@@ -30,6 +32,14 @@ export const photosReducer = (state = initialState, {type, payload})=> {
                     tags: ['safe', ...payload.tags.split(',')]
                 }
             }
+        case GET_PHOTOS.REJECTED:
+            toast.error(GET_PHOTOS_FAILURE_MESSAGE, {
+                position: toast.POSITION.BOTTOM_RIGHT
+              })
+            return {
+                ...state,
+                pagesInfo: { page: 0}
+            };
         default: 
             return state;
     }

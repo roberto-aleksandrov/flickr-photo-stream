@@ -28,14 +28,14 @@ class PhotosPage extends Component {
 
     render() {
         const { photos, pagesInfo } = this.props;
-
         const photoCards = photos.map((photo, index) => <PhotoCard key={index} {...photo}/>);
+
         return ( 
             <InfiniteScroll
                 useWindow={false}
                 pageStart={0}
                 loadMore={this.getPhotos}
-                hasMore={pagesInfo.pages === undefined || pagesInfo.pages > pagesInfo.page}
+                hasMore={pagesInfo.pages > pagesInfo.page} 
                 loader={<div className="loader" key={0}>Loading ...</div>}
             >
                 <Container>

@@ -1,9 +1,7 @@
 import { createAction } from 'redux-actions';
 
-import { GET_PHOTOS, STORE_PHOTOS, SET_PHOTOS_FILTERS } from '../types';
+import { GET_PHOTOS, SET_PHOTOS_FILTERS, PROCESS_PHOTOS } from '../types';
 import { createAsyncActions } from '../../../utilities';
-
-export const storePhotos = createAction(STORE_PHOTOS);
 
 export const setPhotosFilters = createAction(SET_PHOTOS_FILTERS)
 
@@ -13,4 +11,11 @@ export const {
     getPhotosFulfilled,
     getPhotosRejected,
 } = createAsyncActions(GET_PHOTOS, 'getPhotos');
+
+export const {
+    processPhotos,
+    processPhotosPending,
+    processPhotosFulfilled,
+    processPhotosRejected,
+} = createAsyncActions(PROCESS_PHOTOS, 'processPhotos');
 

@@ -1,4 +1,4 @@
-import { pipe, props, prop, map, filter, find, converge, assoc, identity, isNil, complement, where } from 'ramda';
+import { pipe, props, map, filter, find, converge, assoc, identity, isNil, complement, where } from 'ramda';
 import { transformNested } from '../../../utilities';
 import { AUTHOR_LINK, PHOTO_LINK } from '../constants';
 
