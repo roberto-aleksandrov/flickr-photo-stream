@@ -12,7 +12,10 @@ const flickrApi = config => ({
         const options = { jsonpCallbackFunction: 'jsonFlickrApi' };
 
         return fetchJsonp(`${config.baseUrl}/${url}?${queryString}`, options)
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => response.code !== 100 
+                    ? Promise.resolve(response)
+                    : Promise.reject(response))
     }
 })
 
