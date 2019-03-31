@@ -1,9 +1,17 @@
-import express from "express";
+import infrastructureLayer from './infrastructure';
+import applicationLayer from './application';
+import coreLayer from './core';
 
-const app = express();
+(async () => {
+  const data = await infrastructureLayer.initialize({
+    connectionString: process.env.CONNECTION_STRING
+  });
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+  const services = coreLayer.initialize(data);
 
-app.listen(3001, () => console.log("listening on port 3001!"));
+  const app = applicationLayer.initialize(services);
+
+  app.listen(3001);
+})();
+
+// app.listen(3001, () => console.log('listening on port 3001!'));

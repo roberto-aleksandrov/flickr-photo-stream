@@ -31,6 +31,7 @@
       "import/no-dynamic-require": "off",
       "no-throw-literal": "off",
       "max-len": "off",
-      "no-underscore-dangle": "off"
+      "no-underscore-dangle": "off",
+      "prettier/prettier": ["error", { "singleQuote": true }]
     }
   }
