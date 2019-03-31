@@ -10,6 +10,8 @@ import {
     NavLink,
     NavbarToggler } from 'reactstrap';
     
+import routesConfig from '../../routes/routes-config';
+
 import './navigation.css';
 
 class Navigation extends React.Component {
@@ -23,16 +25,19 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Flickr Photos</NavbarBrand>
+            <Navbar color='light' light expand='md'>
+                <NavbarBrand href='/'>Flickr Photos</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
+                    <Nav className='ml-auto' navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/">Photos</NavLink>
+                            <NavLink tag={Link} to={routesConfig.photos.path}>Photos</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} to="/users">Users</NavLink>
+                            <NavLink tag={Link} to={routesConfig.users.path}>View Users</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to={routesConfig.createUser.path}>Create Users</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

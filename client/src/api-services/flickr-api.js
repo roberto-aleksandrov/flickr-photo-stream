@@ -13,7 +13,7 @@ const flickrApi = config => ({
 
         return fetchJsonp(`${config.baseUrl}/${url}?${queryString}`, options)
             .then(response => response.json())
-            .then(response => response.code !== 100 
+            .then(response => response.stat === 'ok' 
                     ? Promise.resolve(response)
                     : Promise.reject(response))
     }

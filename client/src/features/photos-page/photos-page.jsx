@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -36,7 +36,7 @@ class PhotosPage extends Component {
                 pageStart={0}
                 loadMore={this.getPhotos}
                 hasMore={pagesInfo.pages > pagesInfo.page} 
-                loader={<div className="loader" key={0}>Loading ...</div>}
+                loader={<div className='loader' key={0}>Loading ...</div>}
             >
                 <Container>
                     <Row className='photo-search-bar-row'>

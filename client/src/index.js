@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 
 import configureStore from './store/configureStore';
-import { flickrApi }from './api-services';
-import { flickrApiConfig } from './api-services/configurations';
+import { api, flickrApi }from './api-services';
+import { apiConfig, flickrApiConfig } from './api-services/configurations';
 import * as serviceWorker from './serviceWorker';
 
 import App from './App';
@@ -14,7 +14,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const apis = {
-   flickrApi: flickrApi(flickrApiConfig)
+   flickrApi: flickrApi(flickrApiConfig),
+   ajaxApi: api(apiConfig)
 }
 
 ReactDOM.render(

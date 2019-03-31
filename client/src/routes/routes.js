@@ -7,7 +7,9 @@ class Routes extends Component {
         return (
             <Switch>
                 <Route exact path={routesConfig.photos.path} component={routesConfig.photos.component}/>
-                {/* <Route exact path={routesConfig.users.path} component={routesConfig.users.component} /> */}
+                <Route exact path={routesConfig.users.path} component={routesConfig.users.component} />
+                <Route exact path={routesConfig.createUser.path} component={routesConfig.createUser.component} />
+                <Route exact path={routesConfig.updateUser.path} component={routesConfig.updateUser.component} />
                 <Redirect to='/' />
             </Switch>
         );

@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-import {composeWithDevTools} from "redux-devtools-extension"
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 import rootEpic from '../epics/rootEpic';
 import rootReducer from '../reducers/rootReducer';

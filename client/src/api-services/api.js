@@ -1,12 +1,19 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = config => ({
     exec: ({method, data, url}) => {
-        return axios({
+        const reqConfig = {
             method,
-            data,
             url: `${config.baseUrl}/${url}`,
-        })
+        }
+
+        if(method.toLowerCase() === 'get') {
+            reqConfig.params = data;
+        } else {
+            reqConfig.data = data;
+        }
+
+        return axios(reqConfig)
     }
 })
 
