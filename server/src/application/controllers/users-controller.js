@@ -13,7 +13,7 @@ const initialize = app => ({ userService }) => {
   usersRouter.get('/:id', async (req, res) => {
     const { id } = req.params;
 
-    const users = await userService.getById(id);
+    const users = await userService.getById({ id });
 
     res.status(200).json(users);
   });
@@ -31,7 +31,7 @@ const initialize = app => ({ userService }) => {
       body: userBm,
       params: { id }
     } = req;
-    console.log(userBm);
+
     const user = await userService.update({ id, userBm });
 
     res.status(200).json(user);

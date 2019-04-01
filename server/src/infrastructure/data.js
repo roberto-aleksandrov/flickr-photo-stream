@@ -1,5 +1,5 @@
-import context from './context';
-import * as repositories from './repositories';
+import context from './mongoose/context';
+import * as repositories from './mongoose/repositories';
 
 const data = {
   initialize: async ({ connectionString }) => {

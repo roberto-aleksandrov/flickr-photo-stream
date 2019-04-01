@@ -15,8 +15,13 @@ const userSchema = new Schema({
   },
   created: {
     type: Date
-    // required: true
   }
+});
+
+// eslint-disable-next-line func-names
+userSchema.pre('save', function(next) {
+  this.created = new Date();
+  next();
 });
 
 export default userSchema;

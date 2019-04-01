@@ -1,88 +1,53 @@
-import mongoose from 'mongoose';
-import { ValidationError } from '../../utilities/errors';
-import { ERROR_TYPES } from '../../utilities/error-types';
+import {
+  CreateUserValidationSchema,
+  UpdateUserValidationSchema
+} from '../validation-schemas';
 
-const initialize = ({ usersRepository }) => ({
+const initialize = ({ repository, validator }) => ({
   getAll: async () => {
-    return usersRepository.find({});
+    return repository.list({});
   },
-  getById: async id => {
-    const objectIdIsValid = mongoose.Types.ObjectId.isValid(id);
+  getById: async ({ id }) => {
+    await validator
+      .new()
+      .hasValidId(id)
+      .exist({ id })
+      .validate();
 
-    if (!objectIdIsValid) {
-      throw new ValidationError('Invalid Id!', ERROR_TYPES.INVALID_DATA);
-    }
-
-    const user = await usersRepository.findById({
-      _id: mongoose.Types.ObjectId(id.toString())
-    });
-
-    console.log(user);
-
-    if (!user) {
-      throw new ValidationError(
-        'User does not exist!',
-        ERROR_TYPES.INVALID_DATA
-      );
-    }
+    const user = await repository.getById(id);
 
     return user;
   },
   async create({ userBm }) {
-    const userExists = await this.userEmailExists({ email: userBm.email });
+    await validator
+      .new()
+      .modelIsValid(CreateUserValidationSchema, userBm)
+      .isNonExistent({ where: { email: userBm.email } })
+      .validate();
 
-    if (userExists) {
-      throw new ValidationError('User exists!', ERROR_TYPES.EXISTS);
-    }
-
-    const user = await usersRepository.create(userBm);
+    const user = await repository.create(userBm);
 
     return user;
   },
   async update({ id, userBm: { email, ...rest } }) {
-    const objectIdIsValid = mongoose.Types.ObjectId.isValid(id);
+    await validator
+      .new()
+      .hasValidId(id)
+      .modelIsValid(UpdateUserValidationSchema, rest)
+      .exist({ where: { id } })
+      .validate();
 
-    if (!objectIdIsValid) {
-      throw new ValidationError('Invalid Id!', ERROR_TYPES.INVALID_DATA);
-    }
+    const user = await repository.updateById(id, rest);
 
-    const userExists = await this.userEmailExists({
-      _id: mongoose.Types.ObjectId(id.toString())
-    });
-
-    if (!userExists) {
-      throw new ValidationError(
-        'User does not exists!',
-        ERROR_TYPES.INVALID_DATA
-      );
-    }
-
-    await usersRepository.findByIdAndUpdate(id, rest);
+    return user;
   },
   async delete({ id }) {
-    const objectIdIsValid = mongoose.Types.ObjectId.isValid(id);
+    await validator
+      .new()
+      .hasValidId(id)
+      .exist({ where: { id } });
 
-    if (!objectIdIsValid) {
-      throw new ValidationError('Invalid Id!', ERROR_TYPES.INVALID_DATA);
-    }
-
-    const userExists = await this.userEmailExists({
-      _id: mongoose.Types.ObjectId(id.toString())
-    });
-
-    if (!userExists) {
-      throw new ValidationError(
-        'User does not exists!',
-        ERROR_TYPES.INVALID_DATA
-      );
-    }
-
-    await usersRepository.findByIdAndDelete(id);
-  },
-  async userEmailExists(conditions) {
-    const usersCount = await usersRepository.count(conditions);
-
-    return usersCount >= 1;
+    await repository.deleteById(id);
   }
 });
 
