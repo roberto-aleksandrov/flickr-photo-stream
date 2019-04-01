@@ -21,7 +21,7 @@ const initialize = ({ repository, validator }) => ({
   async create({ userBm }) {
     await validator
       .new()
-      .modelIsValid(CreateUserValidationSchema, userBm)
+      .modelIsValid({ schema: CreateUserValidationSchema, entity: userBm })
       .isNonExistent({ where: { email: userBm.email } })
       .validate();
 
@@ -33,7 +33,7 @@ const initialize = ({ repository, validator }) => ({
     await validator
       .new()
       .hasValidId(id)
-      .modelIsValid(UpdateUserValidationSchema, rest)
+      .modelIsValid({ schema: UpdateUserValidationSchema, entity: rest })
       .exist({ where: { id } })
       .validate();
 
@@ -45,7 +45,8 @@ const initialize = ({ repository, validator }) => ({
     await validator
       .new()
       .hasValidId(id)
-      .exist({ where: { id } });
+      .exist({ where: { id } })
+      .validate();
 
     await repository.deleteById(id);
   }

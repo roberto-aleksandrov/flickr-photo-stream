@@ -20,6 +20,7 @@ const initialize = data => {
   );
 
   app.use(errorHandlingMiddleware);
+
   return app;
 };
 

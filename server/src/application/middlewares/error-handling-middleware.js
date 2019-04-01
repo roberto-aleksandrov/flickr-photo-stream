@@ -1,9 +1,9 @@
 import { ERROR_STATUS_CODE_MAPPINGS } from '../constants';
+import { ValidationError } from '../../utilities/errors';
 
 // eslint-disable-next-line no-unused-vars
 const errorHandlingMiddleware = (err, req, res, next) => {
-  console.log(err);
-  if (err.name === 'ValidationError') {
+  if (err instanceof ValidationError) {
     res
       .status(ERROR_STATUS_CODE_MAPPINGS[err.errorType])
       .json({ message: err.message });

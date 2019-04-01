@@ -12,7 +12,7 @@ import { sendApiRequest } from '../../../actions';
 
 const onSuccess = [
     updateUserFulfilled,
-    () => notifySuccess('User successfully created!'),
+    () => notifySuccess('User successfully updated!'),
     () => push(routesConfig.users.path)
 ];
 

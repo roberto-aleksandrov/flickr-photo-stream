@@ -1,4 +1,9 @@
-import { exist, hasValidId, isNonExistent, modelIsValid } from './validations';
+import {
+  exist,
+  hasValidId,
+  isNonExistent,
+  modelIsValid
+} from './validation-functions';
 
 const validator = ({ entityName, repository }) => ({
   modelIsValid(args) {

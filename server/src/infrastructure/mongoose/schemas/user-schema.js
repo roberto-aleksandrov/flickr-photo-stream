@@ -2,16 +2,13 @@ import { Schema } from 'mongoose';
 
 const userSchema = new Schema({
   email: {
-    type: String,
-    required: true
+    type: String
   },
   givenName: {
-    type: String,
-    required: true
+    type: String
   },
   familyName: {
-    type: String,
-    required: true
+    type: String
   },
   created: {
     type: Date

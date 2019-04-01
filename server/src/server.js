@@ -1,12 +1,11 @@
 import infrastructureLayer from './infrastructure';
 import applicationLayer from './application';
 import coreLayer from './core';
-import validator from './utilities/validators/validator';
+import validator from './core/validators/validator';
+import serverConfig from './config';
 
 (async () => {
-  const data = await infrastructureLayer.initialize({
-    connectionString: process.env.CONNECTION_STRING
-  });
+  const data = await infrastructureLayer.initialize(serverConfig);
 
   const services = coreLayer.initialize(data, validator);
 
@@ -14,5 +13,3 @@ import validator from './utilities/validators/validator';
 
   app.listen(3001);
 })();
-
-// app.listen(3001, () => console.log('listening on port 3001!'));

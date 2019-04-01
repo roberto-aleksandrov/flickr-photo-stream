@@ -25,7 +25,9 @@ const readEvaluator = Model => ({
     return entity;
   },
   exist: async spec => {
-    const entitiesCount = await Model.count(normalizeObjectId(spec.where));
+    const entitiesCount = await Model.countDocuments(
+      normalizeObjectId(spec.where)
+    );
 
     return entitiesCount > 0;
   }

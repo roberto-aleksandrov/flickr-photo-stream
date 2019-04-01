@@ -1,5 +1,3 @@
-// import { mapObjIndexed } from 'ramda';
-
 import { userService } from './services';
 
 const initialize = (data, validator) => {
@@ -12,7 +10,6 @@ const initialize = (data, validator) => {
       })
     })
   };
-  // return mapObjIndexed(service => service.initialize(data, validator.new()), services);
 };
 
 export default { initialize };

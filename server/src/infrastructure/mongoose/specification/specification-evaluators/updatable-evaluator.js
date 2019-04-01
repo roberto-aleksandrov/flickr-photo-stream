@@ -8,9 +8,10 @@ const updatableEvaluator = Model => ({
     return response;
   },
   updateById: async (id, data) => {
-    const response = await Model.findByIdAndUpdate(
+    const response = await Model.findOneAndUpdate(
       mongoose.Types.ObjectId(id),
-      data
+      data,
+      { new: true }
     );
 
     return response;

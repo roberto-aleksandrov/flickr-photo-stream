@@ -1,4 +1,6 @@
-class ValidationError extends Error {
+import ExtendableBuiltin from '../extensible-builtin';
+
+class ValidationError extends ExtendableBuiltin(Error) {
   constructor(message, errorType) {
     super(message);
 

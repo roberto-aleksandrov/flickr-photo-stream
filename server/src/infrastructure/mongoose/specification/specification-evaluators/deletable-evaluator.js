@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const deletableEvaluator = Model => ({
   deleteById: async id => {
-    const response = await Model.create(mongoose.Types.ObjectId(id));
+    const response = await Model.findByIdAndDelete(mongoose.Types.ObjectId(id));
 
     return response;
   }

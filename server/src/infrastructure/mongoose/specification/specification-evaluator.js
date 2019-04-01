@@ -12,21 +12,12 @@ const isValidIdEvaluator = () => ({
   idIsValid: mongoose.Types.ObjectId.isValid
 });
 
-const modelIsValidEvaluator = Model => ({
-  modelIsValid: data => {
-    const err = new Model(data).validateSync();
-
-    return err ? err.message : undefined;
-  }
-});
-
 const specEvaluator = converge(unapply(mergeAll), [
   creatableEvaluator,
   readableEvaluator,
   updatableEvaluator,
   deletableEvaluator,
-  isValidIdEvaluator,
-  modelIsValidEvaluator
+  isValidIdEvaluator
 ]);
 
 export default specEvaluator;

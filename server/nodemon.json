@@ -1,5 +1,5 @@
 {
     "env": {
-        "CONNECTION_STRING": "mongodb://localhost:27017/usersdb"
+        "ORM": "mongoose"
     }
 }
