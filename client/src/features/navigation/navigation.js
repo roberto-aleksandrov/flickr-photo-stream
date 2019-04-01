@@ -25,7 +25,7 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <Navbar color='light' light expand='md'>
+            <Navbar color='dark' dark expand='md'>
                 <NavbarBrand href='/'>Flickr Photos</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>

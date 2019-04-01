@@ -14,7 +14,7 @@ const UsersTable = ({ users, handleUserDeletion, handleUserUpdate }) => {
     ))
 
     return (
-        <div class="table-responsive">
+        <div className='table-responsive'>
         <Table className='users-table' striped bordered>
             <thead className='thead-dark'>
                 <tr>

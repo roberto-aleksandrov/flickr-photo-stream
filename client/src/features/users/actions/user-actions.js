@@ -1,4 +1,4 @@
-import { GET_USERS, DELETE_USER, GET_USER_BY_ID, UPDATE_USER } from '../types';
+import { GET_USERS, DELETE_USER, GET_USER_BY_ID, UPDATE_USER, CREATE_USER } from '../types';
 import { createAsyncActions } from '../../../utilities';
 
 export const {
@@ -28,3 +28,11 @@ export const {
     updateUserFulfilled,
     updateUserRejected,
 } = createAsyncActions(UPDATE_USER, 'updateUser');
+
+
+export const {
+    createUser,
+    createUserPending,
+    createUserFulfilled,
+    createUserRejected,
+} = createAsyncActions(CREATE_USER, 'createUser');

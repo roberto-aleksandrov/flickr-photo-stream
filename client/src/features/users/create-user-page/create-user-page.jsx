@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import UpsertUserForm from '../components/upsert-user-form';
-import { createUser } from './actions';
+import { createUser } from '../actions';
 import { CreateUserValidationSchema } from '../utilities';
 
 class CreateUserPage extends Component { 

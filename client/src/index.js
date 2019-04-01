@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
+import { toast } from 'react-toastify';
 
-import configureStore from './store/configureStore';
+import configureStore, { history } from './store/configureStore';
 import { api, flickrApi }from './api-services';
 import { apiConfig, flickrApiConfig } from './api-services/configurations';
 import * as serviceWorker from './serviceWorker';
@@ -16,13 +17,18 @@ import 'react-toastify/dist/ReactToastify.css';
 const apis = {
    flickrApi: flickrApi(flickrApiConfig),
    ajaxApi: api(apiConfig)
-}
+};
+
+toast.configure({
+   autoClose: 8000,
+   draggable: false,
+ });
 
 ReactDOM.render(
    <Provider store={configureStore(apis)}> 
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
          <App />
-      </BrowserRouter>
+      </ConnectedRouter>
    </Provider> 
 , document.getElementById('root'));
 

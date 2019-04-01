@@ -9,7 +9,7 @@ const apiRequestEpic$ = (apis) => action$ => action$.pipe(
     mergeMap(({payload, meta}) => from(apis[meta.api].exec(payload))
         .pipe(
             mergeMap((response) => merge(...payload.onSuccess.map(action => of(action(response))))),
-            catchError(err => of(payload.rejected(err)))
+            catchError(err => merge(...payload.onError.map(action => of(action(err)))))
         )
     )
 );

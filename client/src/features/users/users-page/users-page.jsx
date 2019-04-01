@@ -25,12 +25,14 @@ class UsersPage extends Component {
         const { users } = this.props;
         
         return  (
-            <Container>
-                <UsersTable 
-                    users={users}
-                    handleUserDeletion={this.handleUserDeletion}
-                    handleUserUpdate={this.handleUserUpdate}
-                />
+            <Container className='h-100'>
+                {users && users.length > 0 &&
+                    <UsersTable 
+                        users={users}
+                        handleUserDeletion={this.handleUserDeletion}
+                        handleUserUpdate={this.handleUserUpdate}
+                    />
+                }
             </Container>
         )
     }

@@ -1,6 +1,15 @@
 import fetchJsonp from 'fetch-jsonp';
 import qs from 'qs';
 
+const normalizeErrorResponse = response => ({
+    ...response,
+     response: { 
+        data: {
+            message: response.message 
+        } 
+    } 
+});
+
 const flickrApi = config => ({
     exec: ({data, url}) => {
         const queryString = qs.stringify({
@@ -15,7 +24,7 @@ const flickrApi = config => ({
             .then(response => response.json())
             .then(response => response.stat === 'ok' 
                     ? Promise.resolve(response)
-                    : Promise.reject(response))
+                    : Promise.reject(normalizeErrorResponse(response)))
     }
 })
 

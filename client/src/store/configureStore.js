@@ -1,4 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
 import { createEpicMiddleware } from 'redux-observable';
 import {composeWithDevTools} from 'redux-devtools-extension'
 
@@ -7,10 +9,12 @@ import rootReducer from '../reducers/rootReducer';
 
 const epicMiddleware = createEpicMiddleware();
 
+export const history = createBrowserHistory();
+
 const configureStore = (apis) => {
   const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(epicMiddleware))
+    rootReducer(history),
+    composeWithDevTools(applyMiddleware(epicMiddleware, routerMiddleware(history)))
   );
 
   epicMiddleware.run(rootEpic(apis));

@@ -1,5 +1,2 @@
-import { sendApiRequest } from './api-request-actions';
-
-export {
-    sendApiRequest
-};
+export * from './api-request-actions';
+export * from './notification-actions';
