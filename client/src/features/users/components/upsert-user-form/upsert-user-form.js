@@ -10,7 +10,7 @@ const UpsertUserForm = ({handleSubmit, validationSchema, title, initialValues, i
   <Container className='container h-100'>
     <Row className='h-100'>
         <Col md={7} className='my-auto mx-auto'>
-            <Card className='col d-flex justify-content-center upsert-user-card'>
+            <Card className='col d-flex justify-content-center shadow upsert-user-card'>
                 <CardHeader className='col bg-dark text-center text-white'>{title}</CardHeader>
                 <CardBody>
                     <Formik 
