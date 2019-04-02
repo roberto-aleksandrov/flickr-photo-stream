@@ -10,4 +10,8 @@ const services = coreLayer.initialize(data, validator);
 
 const app = applicationLayer.initialize(services);
 
-module.exports = app.listen(3001);
+const port = process.env.PORT || 3001;
+
+module.exports = app.listen(port, () =>
+  console.log(`Server listening on port: ${port}`)
+);

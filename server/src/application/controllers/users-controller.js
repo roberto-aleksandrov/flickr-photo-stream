@@ -4,13 +4,13 @@ import { USER_ROUTES } from '../constants';
 const initialize = app => ({ userService }) => {
   const usersRouter = new Router();
 
-  usersRouter.get('/', async (req, res) => {
+  usersRouter.get(USER_ROUTES.GET, async (req, res) => {
     const users = await userService.getAll();
 
     res.status(200).json(users);
   });
 
-  usersRouter.get('/:id', async (req, res) => {
+  usersRouter.get(USER_ROUTES.GET_BY_ID, async (req, res) => {
     const { id } = req.params;
 
     const users = await userService.getById({ id });
@@ -18,7 +18,7 @@ const initialize = app => ({ userService }) => {
     res.status(200).json(users);
   });
 
-  usersRouter.post('/', async (req, res) => {
+  usersRouter.post(USER_ROUTES.CREATE, async (req, res) => {
     const userBm = req.body;
 
     const user = await userService.create({ userBm });
@@ -26,7 +26,7 @@ const initialize = app => ({ userService }) => {
     res.status(200).json(user);
   });
 
-  usersRouter.put('/:id', async (req, res) => {
+  usersRouter.put(USER_ROUTES.UPDATE, async (req, res) => {
     const {
       body: userBm,
       params: { id }
@@ -37,7 +37,7 @@ const initialize = app => ({ userService }) => {
     res.status(200).json(user);
   });
 
-  usersRouter.delete('/:id', async (req, res) => {
+  usersRouter.delete(USER_ROUTES.DELETE, async (req, res) => {
     const { id } = req.params;
 
     await userService.delete({ id });

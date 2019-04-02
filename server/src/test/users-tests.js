@@ -15,7 +15,7 @@ const request = chai.request;
 
 before(function(done) {
   new Mockgoose(mongoose).prepareStorage().then(function() {
-      mongoose.connect('InMemoryTestDb', function(err) {
+      mongoose.connect('InMemoryTestDb', {useNewUrlParser: true }, function(err) {
           done(err);
       });
   });

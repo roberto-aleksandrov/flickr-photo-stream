@@ -9,7 +9,7 @@ const UserRow = ({ _id, email, givenName, familyName, created, handleUserDeletio
         <td>{givenName}</td>
         <td>{familyName}</td>
         <td col={3}>{email}</td>
-        <td>{created}</td>
+        <td>{new Date(created).toLocaleString()}</td>
         <td className='text-center user-table-actions'>
             <ReactTooltip id='delete-icon' type='error'>
                 <span>Delete</span>
