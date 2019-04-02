@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "src\\server.js",
+  "main": "src/server.js",
   "scripts": {
     "start": "nodemon start.js",
-    "test": "set NODE_ENV=test&& mocha src\\test\\start-test.js --timeout 100000"
+    "test": "set NODE_ENV=test&& mocha src/test/start-test.js --timeout 100000"
   },
   "author": "Roberto Aleksandrov",
   "license": "MIT",

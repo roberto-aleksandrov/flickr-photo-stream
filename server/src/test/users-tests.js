@@ -12,8 +12,8 @@ const expect = chai.expect;
 const request = chai.request;
 
 describe('Users API Integration Tests', function() {
-  before(async function() {
-    new Mockgoose(mongoose).prepareStorage();
+  before(function() {
+    new Mockgoose(mongoose).prepareStorage()
   });
   afterEach(function (done) {
     mongoose.connection.db.dropDatabase(done)
