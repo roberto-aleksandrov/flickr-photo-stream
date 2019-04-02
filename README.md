@@ -86,7 +86,7 @@ It also supports the creation, update, deletion and visualization of users.
 ```
 
 ### Tests
-- To run the integreation tests of the API navigate to server foloder and run the following command:
+- To run the integreation tests of the API navigate to the server foloder and run the following command:
 
 ```sh
     npm test
