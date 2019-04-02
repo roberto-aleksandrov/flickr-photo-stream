@@ -1,5 +1,3 @@
-const env = process.env.NODE_ENV || 'development';
+import serverConfig from './server-config';
 
-const config = require(`./server-${env}-config`).default;
-
-export default config;
+export default serverConfig;

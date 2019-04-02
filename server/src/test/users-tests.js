@@ -4,6 +4,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { CREATE_USER, ERROR_MESSAGES } from './test-data';
 import mongoose from 'mongoose'
+import { Mockgoose } from 'mock-mongoose';
 
 chai.use(chaiHttp)
 
@@ -11,6 +12,9 @@ const expect = chai.expect;
 const request = chai.request;
 
 describe('Users API Integration Tests', function() {
+  before(async function() {
+    new Mockgoose(mongoose).prepareStorage();
+  });
   afterEach(function (done) {
     mongoose.connection.db.dropDatabase(done)
   });
