@@ -7,4 +7,4 @@ require('babel-register')({
   presets: ['env', 'stage-3'],
 });
 
-module.exports = require('./users-tests');
+module.exports = require('./src/test/users-tests');

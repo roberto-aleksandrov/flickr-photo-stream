@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon start.js",
-    "test": "set NODE_ENV=test&& mocha src/test/start-test.js --timeout 100000"
+    "test": "set NODE_ENV=test&& mocha start-tests.js --timeout 100000"
   },
   "author": "Roberto Aleksandrov",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-async-errors": "^3.1.1",
+    "faker": "^4.1.0",
     "mongoose": "^5.4.20",
     "ramda": "^0.26.1",
     "rxjs": "^6.4.0",
