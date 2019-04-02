@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default {
-  connect: async ({ connectionString }) =>
+  connect: ({ connectionString }) =>
     mongoose.connect(connectionString, {
       useNewUrlParser: true
     })

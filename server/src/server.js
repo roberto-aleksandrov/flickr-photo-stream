@@ -4,12 +4,10 @@ import coreLayer from './core';
 import validator from './core/validators/validator';
 import serverConfig from './config';
 
-(async () => {
-  const data = await infrastructureLayer.initialize(serverConfig);
+const data = infrastructureLayer.initialize(serverConfig);
 
-  const services = coreLayer.initialize(data, validator);
+const services = coreLayer.initialize(data, validator);
 
-  const app = applicationLayer.initialize(services);
+const app = applicationLayer.initialize(services);
 
-  app.listen(3001);
-})();
+module.exports = app.listen(3001);
