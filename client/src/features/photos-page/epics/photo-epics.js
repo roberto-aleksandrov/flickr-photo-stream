@@ -35,5 +35,8 @@ export const processPhotosEpic$ = action$ => action$.pipe(
     ofType(PROCESS_PHOTOS.DEFAULT),
     map(({payload}) => processGetPhotosResponse(payload)),
     map(processPhotosFulfilled),
-    catchError(processPhotosRejected)
+    catchError(err => merge(
+        of(processPhotosRejected(err)), 
+        of(notifyError(err)))
+    )
 );

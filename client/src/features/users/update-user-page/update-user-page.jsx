@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { equals } from 'ramda';
 
 import UpserUserForm from '../components/upsert-user-form';
 import { CreateUserValidationSchema } from '../utilities';
 import { getUserById, updateUser } from '../actions';
+import { notifyWarning } from '../../../actions';
 
 class UpdateUserPage extends Component { 
     
@@ -14,7 +16,14 @@ class UpdateUserPage extends Component {
     }
 
     handleSubmit = (data) => {
-        this.props.updateUser(data);
+        const { updateUser, notifyWarning, user } = this.props
+
+        if(equals(data, user)) {
+            notifyWarning('No changes detected!');
+            return;
+        }
+
+        updateUser(data);
     }
 
     render() {
@@ -41,6 +50,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    notifyWarning: (message) => dispatch(notifyWarning(message)),
     getUserById: (id) => dispatch(getUserById(id)),
     updateUser: (data) => dispatch(updateUser(data)),
 });

@@ -4,7 +4,7 @@ import { Container, Row } from 'reactstrap';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PhotoCard from './components/photo-card';
-import { getPhotos, setPhotosFilters } from './actions';
+import { getPhotos, setPhotosFilters, clearPhotos } from './actions';
 import { GET_PHOTOS_QUERY_STRING } from './constants';
 import SearchBar from '../../components/search-bar';
 
@@ -12,6 +12,10 @@ import './photos-page.css';
 
 class PhotosPage extends Component { 
     
+    componentWillUnmount() {
+        this.props.clearPhotos();
+    }
+
     handleSubmit = ({ searchText }) => {
         this.props.setPhotosFilters({ tags: searchText });
         return;
@@ -28,7 +32,7 @@ class PhotosPage extends Component {
 
     render() {
         const { photos, pagesInfo } = this.props;
-        const photoCards = photos.map((photo, index) => <PhotoCard key={index} {...photo}/>);
+        const photoCards = photos.map(photo => <PhotoCard key={photo.id} {...photo}/>);
 
         return ( 
             <InfiniteScroll
@@ -63,6 +67,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getPhotos: (data) => dispatch(getPhotos(data)),
+    clearPhotos: () => dispatch(clearPhotos()),
     setPhotosFilters: (data) => dispatch(setPhotosFilters(data)),
 });
 

@@ -11,3 +11,7 @@
     right: 5%;
     top: 38%;
 }
+
+.photo-card-body div {
+    word-break: break-all;
+}

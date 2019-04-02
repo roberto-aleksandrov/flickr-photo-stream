@@ -1,4 +1,4 @@
-import { PROCESS_PHOTOS, SET_PHOTOS_FILTERS, GET_PHOTOS } from '../types';
+import { PROCESS_PHOTOS, SET_PHOTOS_FILTERS, GET_PHOTOS, CLEAR_PHOTOS } from '../types';
 
 const initialState = {
     pagesInfo: {
@@ -30,11 +30,14 @@ export const photosReducer = (state = initialState, {type, payload})=> {
                     tags: ['safe', ...payload.tags.split(',')]
                 }
             };
+        case PROCESS_PHOTOS.REJECTED:
         case GET_PHOTOS.REJECTED:
             return {
                 ...state,
                 pagesInfo: { page: 0 }
             };
+        case CLEAR_PHOTOS: 
+            return initialState;
         default: 
             return state;
     }
