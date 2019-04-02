@@ -7,7 +7,7 @@ import './photo-card.css';
 
 const PhotoCard = ({title, tags, authorLink, photoLink, owner, description, imageUrl}) => (
     <Col className='photo-card' xl={3} md={4} sm={6}>
-      <Card>
+      <Card className='shadow'>
         <CardImg top width='100%' height='200px' src={imageUrl} alt='Card image cap' />
         <CardBody>
           <CardTitle>
