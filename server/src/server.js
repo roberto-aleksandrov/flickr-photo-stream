@@ -3,15 +3,23 @@ import applicationLayer from './application';
 import coreLayer from './core';
 import validator from './core/validators/validator';
 import serverConfig from './config';
+import { logger } from './utilities/logging';
 
-const data = infrastructureLayer.initialize(serverConfig);
+module.exports = (async () => {
+  try {
+    const data = await infrastructureLayer.initialize(serverConfig);
 
-const services = coreLayer.initialize(data, validator);
+    const services = coreLayer.initialize({ data, validator });
 
-const app = applicationLayer.initialize(services);
+    const app = applicationLayer.initialize({ services, logger });
 
-const port = process.env.PORT || 3001;
+    const port = process.env.PORT || 3001;
 
-module.exports = app.listen(port, () =>
-  console.log(`Server listening on port: ${port}`)
-);
+    return app.listen(port, () =>
+      console.log(`Server listening on port: ${port}`)
+    );
+  } catch (e) {
+    logger.error(e);
+    process.exit(1);
+  }
+})();

@@ -12,12 +12,17 @@ const isValidIdEvaluator = () => ({
   idIsValid: mongoose.Types.ObjectId.isValid
 });
 
+const collectionNameEvaluator = Model => ({
+  modelName: Model.modelName
+});
+
 const specEvaluator = converge(unapply(mergeAll), [
   creatableEvaluator,
   readableEvaluator,
   updatableEvaluator,
   deletableEvaluator,
-  isValidIdEvaluator
+  isValidIdEvaluator,
+  collectionNameEvaluator
 ]);
 
 export default specEvaluator;

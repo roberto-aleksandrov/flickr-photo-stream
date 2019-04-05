@@ -5,7 +5,7 @@ import {
   modelIsValid
 } from './validation-functions';
 
-const validator = ({ entityName, repository }) => ({
+const validator = ({ repository }) => ({
   modelIsValid(args) {
     this.validations.push(modelIsValid(args));
     return this;
@@ -26,13 +26,12 @@ const validator = ({ entityName, repository }) => ({
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < this.validations.length; index++) {
       await this.validations[index]({
-        entityName,
         repository
       });
     }
   },
   new() {
-    const newValidator = validator({ entityName, repository });
+    const newValidator = validator({ repository });
 
     newValidator.validations = [];
 

@@ -1,3 +1,3 @@
-import controllers from './controllers';
+import usersController from './users-controller';
 
-export default controllers;
+export { usersController };

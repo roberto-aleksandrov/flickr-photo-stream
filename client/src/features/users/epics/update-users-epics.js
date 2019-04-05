@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, debounceTime } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 import { push } from 'connected-react-router';
 
@@ -33,6 +33,7 @@ const requestMeta = { api: 'ajaxApi' };
 
 export const updateUserEpic$ = action$ => action$.pipe(
     ofType(UPDATE_USER.DEFAULT),
+    debounceTime(500),
     mergeMap(({payload}) => 
         merge(
             of(updateUserPending()),

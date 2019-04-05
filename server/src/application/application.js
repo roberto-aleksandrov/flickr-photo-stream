@@ -5,10 +5,10 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import { forEachObjIndexed } from 'ramda';
 
-import controllers from './controllers';
+import * as controllers from './controllers';
 import { errorHandlingMiddleware } from './middlewares';
 
-const initialize = data => {
+const initialize = ({ services, logger }) => {
   const app = express();
 
   app.use(helmet());
@@ -17,11 +17,11 @@ const initialize = data => {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   forEachObjIndexed(
-    controller => controller.initialize(app)(data),
+    controller => controller.initialize(app)(services),
     controllers
   );
 
-  app.use(errorHandlingMiddleware);
+  app.use(errorHandlingMiddleware({ logger }));
 
   return app;
 };

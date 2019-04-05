@@ -1,8 +1,8 @@
 const data = {
-  initialize: ({ databaseConfig }) => {
+  initialize: async ({ databaseConfig }) => {
     const { context, repositories, connectionString } = databaseConfig;
 
-    context.connect({ connectionString });
+    await context.connect({ connectionString });
 
     return repositories;
   }

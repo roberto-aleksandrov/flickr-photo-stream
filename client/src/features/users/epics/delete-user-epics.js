@@ -1,4 +1,4 @@
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, debounceTime } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { merge, of } from 'rxjs';
 
@@ -18,6 +18,7 @@ const requestMeta = { api: 'ajaxApi' };
 
 export const deleteUserEpic$ = action$ => action$.pipe(
     ofType(DELETE_USER.DEFAULT),
+    debounceTime(500),
     mergeMap(({payload}) => 
         merge(
             of(deleteUserPending()),

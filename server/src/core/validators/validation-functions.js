@@ -2,12 +2,12 @@ import validate from 'validate.js';
 import { ValidationError } from '../../utilities/errors';
 import { ERROR_TYPES } from '../../utilities/error-types';
 
-export const exist = predicate => async ({ entityName, repository }) => {
+export const exist = predicate => async ({ repository }) => {
   const entityExists = await repository.exist(predicate);
 
   if (!entityExists) {
     throw new ValidationError(
-      `${entityName} does not exist!`,
+      `${repository.modelName} does not exist!`,
       ERROR_TYPES.INVALID_DATA
     );
   }
@@ -29,15 +29,12 @@ export const hasValidId = id => ({ repository }) => {
   }
 };
 
-export const isNonExistent = predicate => async ({
-  repository,
-  entityName
-}) => {
+export const isNonExistent = predicate => async ({ repository }) => {
   const entityExists = await repository.exist(predicate);
 
   if (entityExists) {
     throw new ValidationError(
-      `${entityName} already exists!`,
+      `${repository.modelName} already exists!`,
       ERROR_TYPES.INVALID_DATA
     );
   }

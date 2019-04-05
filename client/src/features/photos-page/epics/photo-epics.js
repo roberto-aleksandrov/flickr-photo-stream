@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, debounceTime, catchError } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 
 import { GET_PHOTOS, PROCESS_PHOTOS } from '../types'
@@ -24,6 +24,7 @@ const requestMeta = { api: 'flickrApi' };
 
 export const getPhotosEpic$ = action$ => action$.pipe(
     ofType(GET_PHOTOS.DEFAULT),
+    debounceTime(500),
     mergeMap(({payload}) => 
         merge(
             of(getPhotosPending()),

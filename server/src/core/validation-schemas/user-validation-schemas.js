@@ -17,8 +17,6 @@ export const CreateUserValidationSchema = {
   ...UpdateUserValidationSchema,
   email: {
     presence: true,
-    length: {
-      minimum: 4
-    }
+    email: true
   }
 };

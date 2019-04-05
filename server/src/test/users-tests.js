@@ -1,5 +1,4 @@
 /* eslint-disable */
-let app = require( '../server');
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import mongoose from 'mongoose'
@@ -13,7 +12,12 @@ chai.use(chaiHttp)
 const expect = chai.expect;
 const request = chai.request;
 
+let app;
+
 before(function(done) {
+  require( '../server').then(res => {
+    app = res;
+  });
   new Mockgoose(mongoose).prepareStorage().then(function() {
       mongoose.connect('InMemoryTestDb', {useNewUrlParser: true }, function(err) {
           done(err);
